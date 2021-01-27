@@ -18,8 +18,11 @@ const Navbar = () => {
       pos="fixed"
       justifyContent="space-around"
       alignItems="center"
+      fontSize="lg"
+      bgColor="white"
       borderBottom="1px"
       borderColor="gray.200"
+      zIndex="docked"
     >
       <Box boxSize="xs" mt={260}>
         <Link to="/">
@@ -32,12 +35,16 @@ const Navbar = () => {
           _hover={{ color: 'blue.600', transition: '0.2s ease-in-out' }}
           key={i}
         >
-          <Link to={`#${nav.link}`}>{nav.name}</Link>
+          <a href={`#${nav.link}`}>{nav.name}</a>
         </Text>
       ))}
       <ButtonGroup spacing="4" colorScheme="blue">
-        <Button>Login</Button>
-        <Button>Buat Pengaduan</Button>
+        <Button p={6} fontSize="lg">
+          Login
+        </Button>
+        <Button p={6} fontSize="lg">
+          Buat Pengaduan
+        </Button>
       </ButtonGroup>
     </Flex>
   );
