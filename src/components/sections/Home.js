@@ -11,7 +11,7 @@ import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const Home = () => {
   return (
-    <Flex p={20} pt={40} bgColor="gray.50">
+    <Flex p={20} pt={40} bgColor="gray.50" id="home">
       <Box>
         <Heading mb={10}>
           Selamat Datang di Sistem Layanan Pengaduan & Aspirasi SMKN 2

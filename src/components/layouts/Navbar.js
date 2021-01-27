@@ -2,7 +2,12 @@ import { Flex, Box, Image, Text, Button, ButtonGroup } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const navs = ['Beranda', 'Tentang', 'Alur Pengaduan', 'FAQ'];
+  const navs = [
+    { name: 'Beranda', link: 'home' },
+    { name: 'Tentang', link: 'tentang' },
+    { name: 'Alur Pengaduan', link: 'alur' },
+    { name: 'FAQ', link: 'faq' },
+  ];
 
   return (
     <Flex
@@ -27,7 +32,7 @@ const Navbar = () => {
           _hover={{ color: 'blue.600', transition: '0.2s ease-in-out' }}
           key={i}
         >
-          <Link to="/">{nav}</Link>
+          <Link to={`#${nav.link}`}>{nav.name}</Link>
         </Text>
       ))}
       <ButtonGroup spacing="4" colorScheme="blue">
