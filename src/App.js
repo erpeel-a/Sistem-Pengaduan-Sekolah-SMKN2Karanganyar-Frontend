@@ -1,10 +1,6 @@
-import {
-  ChakraProvider,
-  Container,
-  Heading,
-  Text,
-  extendTheme,
-} from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+
+import Navbar from './components/layouts/Navbar';
 
 const theme = extendTheme({
   fonts: {
@@ -16,10 +12,7 @@ const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Container>
-        <Heading>Sistem Pengaduan Sekolah</Heading>
-        <Text style={{ fontSize: 24 }}>Coming Soon . . .</Text>
-      </Container>
+      <Navbar />
     </ChakraProvider>
   );
 }
