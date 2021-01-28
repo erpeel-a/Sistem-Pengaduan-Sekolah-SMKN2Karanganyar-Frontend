@@ -22,11 +22,12 @@ const Navbar = () => {
       bgColor="white"
       borderBottom="1px"
       borderColor="gray.200"
+      boxShadow="sm"
       zIndex="docked"
     >
       <Box boxSize="xs" mt={260}>
         <Link to="/">
-          <Image src="/images/index.png" alt="SMKN 2 Karanganyar's Logo" h="" />
+          <Image src="/images/index.png" alt="SMKN 2 Karanganyar's Logo" />
         </Link>
       </Box>
       {navs.map((nav, i) => (

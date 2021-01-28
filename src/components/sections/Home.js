@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <Flex p={20} pt={40} bgColor="gray.100" id="home">
       <Box>
-        <Heading mb={10}>
+        <Heading as="h1" mb={10}>
           Selamat Datang di Sistem Layanan Pengaduan & Aspirasi SMKN 2
           Karanganyar
         </Heading>
