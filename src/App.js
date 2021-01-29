@@ -1,10 +1,8 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { Switch, Route } from 'react-router-dom';
 
-import Navbar from './components/layouts/Navbar';
-import Home from './components/sections/Home';
-import About from './components/sections/About';
-import Flow from './components/sections/Flow';
-import Faq from './components/sections/Faq';
+import Homepage from './containers/Homepage';
+import Footer from './components/sections/Footer';
 
 const theme = extendTheme({
   fonts: {
@@ -16,11 +14,10 @@ const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Navbar />
-      <Home />
-      <About />
-      <Flow />
-      <Faq />
+      <Switch>
+        <Route path="/" component={Homepage} />
+      </Switch>
+      <Footer />
     </ChakraProvider>
   );
 }
