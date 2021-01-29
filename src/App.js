@@ -1,10 +1,8 @@
-import {
-  ChakraProvider,
-  Container,
-  Heading,
-  Text,
-  extendTheme,
-} from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { Switch, Route } from 'react-router-dom';
+
+import Homepage from './containers/Homepage';
+import Footer from './components/sections/Footer';
 
 const theme = extendTheme({
   fonts: {
@@ -16,10 +14,10 @@ const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Container>
-        <Heading>Sistem Pengaduan Sekolah</Heading>
-        <Text style={{ fontSize: 24 }}>Coming Soon . . .</Text>
-      </Container>
+      <Switch>
+        <Route path="/" component={Homepage} />
+      </Switch>
+      <Footer />
     </ChakraProvider>
   );
 }
