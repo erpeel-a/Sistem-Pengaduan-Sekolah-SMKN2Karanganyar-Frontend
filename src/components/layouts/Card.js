@@ -25,7 +25,14 @@ const Card = ({ icon, title, content }) => {
           {icon}
         </Flex>
       </IconContext.Provider>
-      <Heading as="h3" size="lg" my={4} fontWeight="600" color="blue.600">
+      <Heading
+        as="h3"
+        size="md"
+        my={4}
+        textAlign="center"
+        fontWeight="600"
+        color="blue.600"
+      >
         {title}
       </Heading>
       <Text textAlign="center" fontSize="lg" color="gray.600">
