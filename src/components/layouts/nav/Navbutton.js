@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Flex } from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
 
 const Navbutton = () => {
   return (
