@@ -5,6 +5,7 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
+  Text,
 } from '@chakra-ui/react';
 
 const Accordion = () => {
@@ -38,12 +39,19 @@ const Accordion = () => {
             _expanded={{ bg: 'gray.50', color: 'blue.600' }}
             borderRadius="lg"
           >
-            <Box flex="1" textAlign="left" fontWeight="600" fontSize="lg">
+            <Box
+              flex="1"
+              textAlign="left"
+              fontWeight="600"
+              fontSize={{ base: 'md', xl: 'lg' }}
+            >
               {faq.title}
             </Box>
             <AccordionIcon />
           </AccordionButton>
-          <AccordionPanel pb={4}>{faq.content}</AccordionPanel>
+          <AccordionPanel pb={4} fontSize={{ base: 'md', xl: 'lg' }}>
+            {faq.content}
+          </AccordionPanel>
         </AccordionItem>
       ))}
     </ChakraAccordion>

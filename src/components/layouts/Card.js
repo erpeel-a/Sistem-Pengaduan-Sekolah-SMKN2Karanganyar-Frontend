@@ -35,7 +35,11 @@ const Card = ({ icon, title, content }) => {
       >
         {title}
       </Heading>
-      <Text textAlign="center" fontSize="lg" color="gray.600">
+      <Text
+        textAlign="center"
+        fontSize={{ base: 'md', xl: 'lg' }}
+        color="gray.600"
+      >
         {content}
       </Text>
     </Flex>
