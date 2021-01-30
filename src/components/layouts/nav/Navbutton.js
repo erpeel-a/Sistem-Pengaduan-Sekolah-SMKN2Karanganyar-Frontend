@@ -1,9 +1,7 @@
 import { Button, ButtonGroup } from '@chakra-ui/react';
 import { withRouter } from 'react-router-dom';
 
-const Navbutton = props => {
-  console.log(props);
-
+const Navbutton = ({ history }) => {
   return (
     <ButtonGroup
       mt={{ base: 4, lg: 0 }}
@@ -16,7 +14,7 @@ const Navbutton = props => {
         mb={{ base: 4, lg: 0 }}
         p={6}
         fontSize={{ base: 'md', xl: 'lg' }}
-        onClick={() => props.history.push('/login')}
+        onClick={() => history.push('/login')}
       >
         Login
       </Button>
