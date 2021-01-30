@@ -3,6 +3,7 @@ import { createBreakpoints } from '@chakra-ui/theme-tools';
 import { Switch, Route } from 'react-router-dom';
 
 import Homepage from './containers/Homepage';
+import Login from './containers/Login';
 import Footer from './components/sections/Footer';
 
 const breakpoints = createBreakpoints({
@@ -24,7 +25,8 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Switch>
-        <Route path="/" component={Homepage} />
+        <Route path="/" exact component={Homepage} />
+        <Route path="/login" component={Login} />
       </Switch>
       <Footer />
     </ChakraProvider>

@@ -15,10 +15,11 @@ const Home = () => {
 
   return (
     <Flex
+      as="section"
+      id="home"
       p={{ base: 5, md: 20 }}
       pt={{ base: 100, md: 40 }}
       bgColor="gray.100"
-      id="home"
     >
       <Box>
         <Heading as="h1" mt={{ base: 10, md: 0 }} mb={10}>

@@ -39,6 +39,7 @@ const Flow = () => {
 
   return (
     <Flex
+      as="section"
       id="alur"
       px={{ base: 5, md: 20, lg: 40 }}
       py={10}

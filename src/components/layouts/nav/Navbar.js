@@ -10,6 +10,7 @@ const Navbar = () => {
 
   return (
     <Flex
+      as="nav"
       px={{ base: 5, md: 20, lg: 5 }}
       py={10}
       h={100}

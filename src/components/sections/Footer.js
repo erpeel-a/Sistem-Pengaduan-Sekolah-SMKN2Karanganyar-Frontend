@@ -3,6 +3,7 @@ import { Flex, Text } from '@chakra-ui/react';
 const Footer = () => {
   return (
     <Flex
+      as="footer"
       id="footer"
       px={{ base: 5, md: 20, lg: 40 }}
       py={10}
