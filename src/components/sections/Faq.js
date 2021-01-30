@@ -4,8 +4,14 @@ import Accordion from '../layouts/Accordion';
 
 const Faq = () => {
   return (
-    <Flex id="faq" px={40} py={10} flexDirection="column" alignItems="center">
-      <Heading color="blue.600" mb={4}>
+    <Flex
+      id="faq"
+      px={{ base: 5, md: 20, lg: 40 }}
+      py={10}
+      flexDirection="column"
+      alignItems="center"
+    >
+      <Heading color="blue.600" mb={4} textAlign="center">
         Frequently Asked Question
       </Heading>
       <Box

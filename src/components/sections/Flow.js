@@ -40,16 +40,23 @@ const Flow = () => {
   return (
     <Flex
       id="alur"
-      px={40}
+      px={{ base: 5, md: 20, lg: 40 }}
       py={10}
       flexDir="column"
       alignItems="center"
       bgColor="gray.100"
     >
-      <Heading color="blue.600" mb={8}>
+      <Heading color="blue.600" mb={8} textAlign="center">
         Bagaimana Alur Pengaduan ?
       </Heading>
-      <Grid templateColumns="repeat(3, 1fr)" gap={8}>
+      <Grid
+        templateColumns={{
+          sm: '1fr',
+          md: 'repeat(2, 1fr)',
+          xl: 'repeat(3, 1fr)',
+        }}
+        gap={8}
+      >
         {cards.map((card, i) => (
           <Card
             key={i}

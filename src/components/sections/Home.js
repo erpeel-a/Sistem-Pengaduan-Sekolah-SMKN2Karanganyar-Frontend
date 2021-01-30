@@ -6,26 +6,37 @@ import {
   Box,
   ButtonGroup,
   Button,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const Home = () => {
+  const [isLaptop] = useMediaQuery('(min-width: 960px)');
+
   return (
-    <Flex p={20} pt={40} bgColor="gray.100" id="home">
+    <Flex
+      p={{ base: 5, md: 20 }}
+      pt={{ base: 100, md: 40 }}
+      bgColor="gray.100"
+      id="home"
+    >
       <Box>
-        <Heading as="h1" mb={10}>
+        <Heading as="h1" mt={{ base: 10, md: 0 }} mb={10}>
           Selamat Datang di Sistem Layanan Pengaduan & Aspirasi SMKN 2
           Karanganyar
         </Heading>
-        <Text mb={8} color="gray.600" fontSize="lg">
+        <Text mb={8} color="gray.600" fontSize={{ base: 'md', xl: 'lg' }}>
           Laporkan kepada kami jika ada Pengaduan atau pun Aspirasi yang dapat
           menjadi langkah awal untuk kita menjadi lebih baik lagi.
         </Text>
-        <ButtonGroup spacing={4}>
+        <ButtonGroup
+          spacing={{ base: 0, md: 4 }}
+          flexDir={{ base: 'column', md: 'row' }}
+        >
           <Button
             p={6}
             fontWeight="400"
-            fontSize="lg"
+            fontSize={{ base: 'md', xl: 'lg' }}
             color="gray.600"
             colorScheme="gray"
             borderBottom="2px"
@@ -33,14 +44,22 @@ const Home = () => {
           >
             Pelajari Selengkapnya
           </Button>
-          <Button p={6} fontWeight="400" colorScheme="blue" fontSize="lg">
+          <Button
+            mt={{ base: 4, md: 0 }}
+            p={6}
+            fontWeight="400"
+            fontSize={{ base: 'md', xl: 'lg' }}
+            colorScheme="blue"
+          >
             Buat Pengaduan <ArrowForwardIcon w={5} h={5} ml={1} />
           </Button>
         </ButtonGroup>
       </Box>
-      <Box w="100%">
-        <Image src="/images/feature-graphic.png" />
-      </Box>
+      {isLaptop && (
+        <Box w="100%" my="auto">
+          <Image src="/images/feature-graphic.png" />
+        </Box>
+      )}
     </Flex>
   );
 };
