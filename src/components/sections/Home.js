@@ -9,16 +9,18 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { withRouter } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({ history }) => {
   const [isLaptop] = useMediaQuery('(min-width: 960px)');
 
   return (
     <Flex
+      as="section"
+      id="home"
       p={{ base: 5, md: 20 }}
       pt={{ base: 100, md: 40 }}
       bgColor="gray.100"
-      id="home"
     >
       <Box>
         <Heading as="h1" mt={{ base: 10, md: 0 }} mb={10}>
@@ -50,6 +52,7 @@ const Home = () => {
             fontWeight="400"
             fontSize={{ base: 'md', xl: 'lg' }}
             colorScheme="blue"
+            onClick={() => history.push('/create')}
           >
             Buat Pengaduan <ArrowForwardIcon w={5} h={5} ml={1} />
           </Button>
@@ -64,4 +67,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withRouter(Home);

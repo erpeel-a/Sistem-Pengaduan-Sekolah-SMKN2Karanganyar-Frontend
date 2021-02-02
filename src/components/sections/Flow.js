@@ -12,7 +12,7 @@ const Flow = () => {
     },
     {
       icon: <FiEdit2 />,
-      title: 'Tulis Pengaduan',
+      title: 'Buat Pengaduan',
       content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam asperiores iure obcaecati officiis harum corporis.`,
     },
     {
@@ -27,7 +27,7 @@ const Flow = () => {
     },
     {
       icon: <FiEdit2 />,
-      title: 'Tulis Pengaduan',
+      title: 'Buat Pengaduan',
       content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam asperiores iure obcaecati officiis harum corporis.`,
     },
     {
@@ -39,6 +39,7 @@ const Flow = () => {
 
   return (
     <Flex
+      as="section"
       id="alur"
       px={{ base: 5, md: 20, lg: 40 }}
       py={10}

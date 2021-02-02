@@ -1,6 +1,7 @@
 import { Button, ButtonGroup } from '@chakra-ui/react';
+import { withRouter } from 'react-router-dom';
 
-const Navbutton = () => {
+const Navbutton = ({ history }) => {
   return (
     <ButtonGroup
       mt={{ base: 4, lg: 0 }}
@@ -10,13 +11,17 @@ const Navbutton = () => {
       flexDir={{ base: 'column', lg: 'row' }}
     >
       <Button mb={{ base: 4, lg: 0 }} p={6} fontSize={{ base: 'md', xl: 'lg' }}>
-        Login
+        Cari Pengaduan
       </Button>
-      <Button p={6} fontSize={{ base: 'md', xl: 'lg' }}>
-        Buat Pengaduan
+      <Button
+        p={6}
+        fontSize={{ base: 'md', xl: 'lg' }}
+        onClick={() => history.push('/login')}
+      >
+        Login
       </Button>
     </ButtonGroup>
   );
 };
 
-export default Navbutton;
+export default withRouter(Navbutton);

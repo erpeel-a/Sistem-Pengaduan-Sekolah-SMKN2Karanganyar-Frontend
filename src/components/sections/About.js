@@ -3,10 +3,11 @@ import { Flex, Box, Heading, Text } from '@chakra-ui/react';
 const About = () => {
   return (
     <Flex
+      as="section"
       id="tentang"
       px={{ base: 5, md: 20, lg: 40 }}
       py={10}
-      flexDirection="column"
+      flexDir="column"
       alignItems="center"
     >
       <Heading color="blue.600" mb={4} textAlign="center">
