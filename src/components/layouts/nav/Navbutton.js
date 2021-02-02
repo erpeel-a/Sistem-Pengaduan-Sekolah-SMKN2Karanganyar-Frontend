@@ -10,11 +10,10 @@ const Navbutton = ({ history }) => {
       w={{ base: '100%', lg: 'auto' }}
       flexDir={{ base: 'column', lg: 'row' }}
     >
-      <Button p={6} fontSize={{ base: 'md', xl: 'lg' }}>
+      <Button mb={{ base: 4, lg: 0 }} p={6} fontSize={{ base: 'md', xl: 'lg' }}>
         Cari Pengaduan
       </Button>
       <Button
-        mb={{ base: 4, lg: 0 }}
         p={6}
         fontSize={{ base: 'md', xl: 'lg' }}
         onClick={() => history.push('/login')}

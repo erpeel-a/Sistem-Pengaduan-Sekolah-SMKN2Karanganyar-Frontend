@@ -12,14 +12,11 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
-import Navbar from '../components/layouts/nav/Navbar';
-
 const Login = () => {
   const [show, setShow] = useState(false);
 
   return (
     <>
-      <Navbar />
       <Flex
         as="section"
         p={{ base: 5, md: 20 }}
