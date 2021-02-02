@@ -13,7 +13,7 @@ const Footer = () => {
       fontWeight="600"
     >
       <Text textAlign="center">
-        &copy; 2021 - Developed by XII RPL A Dev Team
+        &copy; {new Date().getFullYear()} - Developed by XII RPL A Dev Team
       </Text>
     </Flex>
   );

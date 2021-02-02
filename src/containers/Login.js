@@ -62,7 +62,8 @@ const Login = () => {
             }}
           >
             <Input
-              placeholder="Masukkan Username Kamu"
+              placeholder="Masukkan Email Kamu"
+              type="email"
               mb={4}
               fontSize={{ base: 'md', xl: 'lg' }}
             />
