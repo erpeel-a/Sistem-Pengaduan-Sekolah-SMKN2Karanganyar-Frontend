@@ -6,7 +6,7 @@ import Navbutton from './Navbutton';
 import Drawer from './Drawer';
 
 const Navbar = () => {
-  const [isTablet] = useMediaQuery('(min-width: 960px)');
+  const [isLaptop] = useMediaQuery('(min-width: 960px)');
 
   return (
     <Flex
@@ -34,9 +34,9 @@ const Navbar = () => {
           />
         </Link>
       </Box>
-      {!isTablet && <Drawer />}
-      {isTablet && <Navlinks />}
-      {isTablet && <Navbutton />}
+      {!isLaptop && <Drawer />}
+      {isLaptop && <Navlinks />}
+      {isLaptop && <Navbutton />}
     </Flex>
   );
 };
