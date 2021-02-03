@@ -10,7 +10,12 @@ const Navbutton = ({ history }) => {
       w={{ base: '100%', lg: 'auto' }}
       flexDir={{ base: 'column', lg: 'row' }}
     >
-      <Button mb={{ base: 4, lg: 0 }} p={6} fontSize={{ base: 'md', xl: 'lg' }}>
+      <Button
+        mb={{ base: 4, lg: 0 }}
+        p={6}
+        fontSize={{ base: 'md', xl: 'lg' }}
+        onClick={() => history.push('/search')}
+      >
         Cari Pengaduan
       </Button>
       <Button

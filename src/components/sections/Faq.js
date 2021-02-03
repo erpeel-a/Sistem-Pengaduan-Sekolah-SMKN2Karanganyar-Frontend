@@ -18,7 +18,7 @@ const Faq = () => {
       <Box
         bgColor="gray.100"
         py={5}
-        px={10}
+        px={{ base: 5, md: 10 }}
         borderRadius="xl"
         boxShadow="md"
         width="100%"

@@ -35,7 +35,12 @@ const Create = () => {
   return (
     <Box pt={40} pb={5} px={{ base: 5, md: 20 }} bgColor="gray.100">
       <form onSubmit={handleSubmit}>
-        <VStack px={10} bgColor="white" borderRadius="xl" boxShadow="md">
+        <VStack
+          px={{ base: 5, md: 10 }}
+          bgColor="white"
+          borderRadius="xl"
+          boxShadow="md"
+        >
           <Heading as="h1" size="lg" my={10} textAlign="center">
             Buat Pengaduan / Aspirasi
           </Heading>
@@ -45,6 +50,7 @@ const Create = () => {
               label={input.label}
               type={input.type}
               required
+              useLabel
             />
           ))}
           <FormControl mb={2} isRequired>
@@ -85,7 +91,6 @@ const Create = () => {
             my={5}
             py={7}
             w="100%"
-            // h={50}
             fontSize={{ base: 'md', md: 'lg' }}
           >
             Kirim
