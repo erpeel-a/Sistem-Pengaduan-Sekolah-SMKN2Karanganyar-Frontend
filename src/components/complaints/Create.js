@@ -8,6 +8,7 @@ import {
   Select,
   Textarea,
   VStack,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
 
@@ -23,6 +24,7 @@ const Create = () => {
     { label: 'Nomor Telepon', type: 'number' },
     { label: 'Alamat', type: 'text' },
   ];
+  const [isTablet] = useMediaQuery('(min-width: 768px)');
   const [startDate, setStartDate] = useState(new Date());
 
   const handleSubmit = e => {
@@ -31,10 +33,10 @@ const Create = () => {
   };
 
   return (
-    <Box pt={40} pb={5} px={20} bgColor="gray.100">
+    <Box pt={40} pb={5} px={{ base: 5, md: 20 }} bgColor="gray.100">
       <form onSubmit={handleSubmit}>
         <VStack px={10} bgColor="white" borderRadius="xl" boxShadow="md">
-          <Heading as="h1" size="lg" my={10}>
+          <Heading as="h1" size="lg" my={10} textAlign="center">
             Buat Pengaduan / Aspirasi
           </Heading>
           {inputs.map((input, i) => (
@@ -46,14 +48,21 @@ const Create = () => {
             />
           ))}
           <FormControl mb={2} isRequired>
-            <FormLabel>Jenis Pengaduan</FormLabel>
-            <Select placeholder="Silahkan Pilih Jenis Pengaduan">
+            <FormLabel fontSize={{ base: 'md', md: 'lg' }}>
+              Jenis Pengaduan
+            </FormLabel>
+            <Select
+              size={!isTablet ? 'md' : 'lg'}
+              placeholder="Silahkan Pilih Jenis Pengaduan"
+            >
               <option value="Aduan">Aduan</option>
               <option value="Aspirasi">Aspirasi</option>
             </Select>
           </FormControl>
           <FormControl mb={2} isRequired>
-            <FormLabel>Tanggal Melapor</FormLabel>
+            <FormLabel fontSize={{ base: 'md', md: 'lg' }}>
+              Tanggal Melapor
+            </FormLabel>
             <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
@@ -61,10 +70,24 @@ const Create = () => {
             />
           </FormControl>
           <FormControl mb={2} isRequired>
-            <FormLabel>Tulis Laporan</FormLabel>
-            <Textarea placeholder="Tulis Laporan" resize="vertical" />
+            <FormLabel fontSize={{ base: 'md', md: 'lg' }}>
+              Tulis Laporan
+            </FormLabel>
+            <Textarea
+              placeholder="Tulis Laporan"
+              resize="vertical"
+              size={!isTablet ? 'md' : 'lg'}
+            />
           </FormControl>
-          <Button type="submit" colorScheme="blue" my={5} w="100%">
+          <Button
+            type="submit"
+            colorScheme="blue"
+            my={5}
+            py={7}
+            w="100%"
+            // h={50}
+            fontSize={{ base: 'md', md: 'lg' }}
+          >
             Kirim
           </Button>
         </VStack>
