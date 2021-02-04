@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
   Flex,
   Heading,
@@ -7,12 +8,31 @@ import {
   ButtonGroup,
   Button,
   useMediaQuery,
+  useToast,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { withRouter } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Home = ({ history }) => {
   const [isLaptop] = useMediaQuery('(min-width: 960px)');
+  const { user } = useContext(AuthContext);
+  const toast = useToast();
+
+  const handleClick = () => {
+    if (user) {
+      history.push('/create');
+    } else {
+      history.push('/login');
+      toast({
+        position: 'top',
+        title: 'Silahkan Login Terlebih Dahulu!',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <Flex
@@ -52,7 +72,7 @@ const Home = ({ history }) => {
             fontWeight="400"
             fontSize={{ base: 'md', xl: 'lg' }}
             colorScheme="blue"
-            onClick={() => history.push('/create')}
+            onClick={handleClick}
           >
             Buat Pengaduan <ArrowForwardIcon w={5} h={5} ml={1} />
           </Button>

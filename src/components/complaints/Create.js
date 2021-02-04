@@ -9,10 +9,12 @@ import {
   Textarea,
   VStack,
   useMediaQuery,
+  useDisclosure,
 } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
 
 import CustomInput from '../layouts/CustomInput';
+import Success from './Success';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../assets/css/date-picker.css';
 
@@ -26,10 +28,11 @@ const Create = () => {
   ];
   const [isTablet] = useMediaQuery('(min-width: 768px)');
   const [startDate, setStartDate] = useState(new Date());
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSubmit = e => {
     e.preventDefault();
-    alert('Laporan Berhasil Dikirim!');
+    onOpen();
   };
 
   return (
@@ -97,6 +100,7 @@ const Create = () => {
           </Button>
         </VStack>
       </form>
+      <Success isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

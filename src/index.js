@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import AuthContextProvider from './contexts/AuthContext';
 import './assets/css/style.css';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -10,8 +11,10 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
-      <ColorModeScript />
-      <App />
+      <AuthContextProvider>
+        <ColorModeScript />
+        <App />
+      </AuthContextProvider>
     </BrowserRouter>
   </StrictMode>,
   document.getElementById('root')
