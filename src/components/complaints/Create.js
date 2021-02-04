@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { instance } from '../../apis/axios.instance';
 import {
   Box,
   Button,
@@ -12,6 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import CustomInput from '../layouts/CustomInput';
 import Success from './Success';
@@ -19,19 +21,75 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../assets/css/date-picker.css';
 
 const Create = () => {
-  const inputs = [
-    { label: 'Judul Pengaduan / Aspirasi', type: 'text' },
-    { label: 'Nomor Induk', type: 'number' },
-    { label: 'Nama', type: 'text' },
-    { label: 'Nomor Telepon', type: 'number' },
-    { label: 'Alamat', type: 'text' },
-  ];
   const [isTablet] = useMediaQuery('(min-width: 768px)');
-  const [startDate, setStartDate] = useState(new Date());
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { user } = useContext(AuthContext);
+
+  const defaultData = {
+    judul_laporan: 'Ini Judul',
+    no_induk: user.nomor_induk,
+    nama: user.name,
+    email: user.email,
+    no_telp: '08996697830',
+    alamat: 'Matesih, Kab. Karanganyar',
+    jenis_pengaduan: '',
+    tanggal_laporan: new Date(),
+    laporan: 'Wkwkwkwkwkwkwkwkwkwk',
+  };
+
+  const [state, setState] = useState(defaultData);
+
+  const inputs = [
+    {
+      label: 'Judul Pengaduan / Aspirasi',
+      type: 'text',
+      value: state.judul_laporan,
+      change: e => setState({ ...state, judul_laporan: e.target.value }),
+    },
+    {
+      label: 'Nomor Induk',
+      type: 'number',
+      readOnly: true,
+      value: state.no_induk,
+    },
+    {
+      label: 'Nama',
+      type: 'text',
+      readOnly: true,
+      value: state.nama,
+    },
+    {
+      label: 'Email',
+      type: 'email',
+      readOnly: true,
+      value: state.email,
+    },
+    {
+      label: 'Nomor Telepon',
+      type: 'number',
+      value: state.no_telp,
+      change: e => setState({ ...state, no_telp: e.target.value }),
+    },
+    {
+      label: 'Alamat',
+      type: 'text',
+      value: state.alamat,
+      change: e => setState({ ...state, alamat: e.target.value }),
+    },
+  ];
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log(state);
+    console.log(user.token);
+    instance
+      .post('/pengaduan', state, {
+        headers: {
+          Authorization: user.token,
+        },
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
     onOpen();
   };
 
@@ -52,7 +110,9 @@ const Create = () => {
               key={i}
               label={input.label}
               type={input.type}
-              required
+              readOnly={input.readOnly}
+              value={input.value}
+              onChange={input.change}
               useLabel
             />
           ))}
@@ -63,9 +123,12 @@ const Create = () => {
             <Select
               size={!isTablet ? 'md' : 'lg'}
               placeholder="Silahkan Pilih Jenis Pengaduan"
+              onChange={e =>
+                setState({ ...state, jenis_pengaduan: e.target.value })
+              }
             >
-              <option value="Aduan">Aduan</option>
-              <option value="Aspirasi">Aspirasi</option>
+              <option value="pengaduan">Pengaduan</option>
+              <option value="aspirasi">Aspirasi</option>
             </Select>
           </FormControl>
           <FormControl mb={2} isRequired>
@@ -73,8 +136,8 @@ const Create = () => {
               Tanggal Melapor
             </FormLabel>
             <DatePicker
-              selected={startDate}
-              onChange={date => setStartDate(date)}
+              selected={state.tanggal_laporan}
+              onChange={date => setState({ ...state, tanggal_laporan: date })}
               showPopperArrow={false}
             />
           </FormControl>
@@ -83,6 +146,8 @@ const Create = () => {
               Tulis Laporan
             </FormLabel>
             <Textarea
+              value={state.laporan}
+              onChange={e => setState({ ...state, laporan: e.target.value })}
               placeholder="Tulis Laporan"
               resize="vertical"
               size={!isTablet ? 'md' : 'lg'}

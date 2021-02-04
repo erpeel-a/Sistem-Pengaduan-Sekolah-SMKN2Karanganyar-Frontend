@@ -37,7 +37,7 @@ const Navbar = () => {
           />
         </Link>
       </Box>
-      {!isLaptop && <Drawer />}
+      {!isLaptop && <Drawer user={user} clearUser={clearUser} />}
       {isLaptop && <Navlinks />}
       {isLaptop && <Navbutton user={user} clearUser={clearUser} />}
     </Flex>
