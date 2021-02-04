@@ -12,37 +12,31 @@ import {
 import { ReactComponent as Illustration } from '../../assets/images/success-illustration.svg';
 
 const Success = ({ isOpen, onClose }) => (
-  <>
-    <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <VStack>
-          <ModalHeader fontSize={{ base: 'xl', md: '2xl' }}>
-            Laporan Berhasil Dikirim!
-          </ModalHeader>
-          <ModalBody>
-            <VStack>
-              <Illustration />
-              <Text
-                pt={8}
-                textAlign="center"
-                fontSize={{ base: 'md', md: 'lg' }}
-              >
-                Silahkan tunggu konfirmasi dari kami melalui email yang kamu
-                daftarkan.
-              </Text>
-            </VStack>
-          </ModalBody>
+  <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+    <ModalOverlay />
+    <ModalContent>
+      <VStack>
+        <ModalHeader fontSize={{ base: 'xl', md: '2xl' }}>
+          Laporan Berhasil Dikirim!
+        </ModalHeader>
+        <ModalBody>
+          <VStack>
+            <Illustration />
+            <Text pt={8} textAlign="center" fontSize={{ base: 'md', md: 'lg' }}>
+              Silahkan tunggu konfirmasi dari kami melalui email yang kamu
+              daftarkan.
+            </Text>
+          </VStack>
+        </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Tutup
-            </Button>
-          </ModalFooter>
-        </VStack>
-      </ModalContent>
-    </Modal>
-  </>
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={onClose}>
+            Tutup
+          </Button>
+        </ModalFooter>
+      </VStack>
+    </ModalContent>
+  </Modal>
 );
 
 export default Success;
