@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { instance } from '../../apis/axios.instance';
+import { formatISO } from 'date-fns';
 import {
   Box,
   Button,
@@ -26,15 +27,15 @@ const Create = () => {
   const { user } = useContext(AuthContext);
 
   const defaultData = {
-    judul_laporan: 'Ini Judul',
-    no_induk: user.nomor_induk,
+    judul_laporan: '',
+    nomor_induk: user.nomor_induk,
     nama: user.name,
     email: user.email,
-    no_telp: '08996697830',
-    alamat: 'Matesih, Kab. Karanganyar',
+    no_telp: '',
+    alamat: '',
     jenis_pengaduan: '',
     tanggal_laporan: new Date(),
-    laporan: 'Wkwkwkwkwkwkwkwkwkwk',
+    laporan: '',
   };
 
   const [state, setState] = useState(defaultData);
@@ -50,7 +51,7 @@ const Create = () => {
       label: 'Nomor Induk',
       type: 'number',
       readOnly: true,
-      value: state.no_induk,
+      value: state.nomor_induk,
     },
     {
       label: 'Nama',
@@ -83,11 +84,20 @@ const Create = () => {
     console.log(state);
     console.log(user.token);
     instance
-      .post('/pengaduan', state, {
-        headers: {
-          Authorization: user.token,
+      .post(
+        '/pengaduan',
+        {
+          ...state,
+          tanggal_laporan: formatISO(new Date(state.tanggal_laporan), {
+            representation: 'date',
+          }),
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
       .then(response => console.log(response))
       .catch(error => console.log(error));
     onOpen();
