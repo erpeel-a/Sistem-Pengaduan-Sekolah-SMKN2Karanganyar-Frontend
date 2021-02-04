@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { instance, setAuthToken } from '../apis/axios.instance';
+import { instance } from '../apis/axios.instance';
 import {
   Box,
   Button,
@@ -30,8 +30,8 @@ const Login = ({ history }) => {
       .post('/login', { email: state.email, password: state.password })
       .then(response => {
         const { email, name, nomor_induk } = response.data.user;
-        setUser({ email, name, nomor_induk });
-        setAuthToken(response.data.token);
+        const token = response.data.token;
+        setUser({ email, name, nomor_induk, token });
         toast({
           position: 'top',
           title: 'Login Berhasil!',
