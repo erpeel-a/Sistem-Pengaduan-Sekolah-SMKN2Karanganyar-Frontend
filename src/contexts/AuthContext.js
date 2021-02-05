@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
+import { instance } from '../apis/axios.instance';
 
 export const AuthContext = createContext();
 
@@ -14,6 +15,18 @@ const AuthContextProvider = ({ children }) => {
   }, [user]);
 
   const clearUser = () => {
+    instance
+      .post(
+        '/logout',
+        { email: user.email, password: user.password },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
     sessionStorage.removeItem('user');
     window.location.reload();
   };
