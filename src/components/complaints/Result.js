@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom';
 import {
   Alert,
   AlertIcon,
@@ -7,19 +8,14 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react';
+import { checkAlert, checkStatus } from '../layouts/Check';
 
-const Result = () => {
-  const results = [
-    { alert: 'Diterima', status: 'success' },
-    { alert: 'Ditolak', status: 'error' },
-    { alert: 'Pending', status: 'warning' },
-  ];
-
+const Result = ({ history, complaints }) => {
   return (
     <>
-      {results.map((result, i) => (
+      {complaints?.data?.map(complaint => (
         <Box
-          key={i}
+          key={complaint.id}
           py={5}
           px={{ base: 5, md: 10 }}
           w="100%"
@@ -29,30 +25,26 @@ const Result = () => {
           borderBottomColor="blue.600"
         >
           <Heading as="h2" size="md">
-            Judul Pengaduan
+            {complaint.judul_laporan}
           </Heading>
-          <Text fontWeight="600">Nama Pelapor : Hendra Agil</Text>
-          <Text isTruncated>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
-            asperiores iure obcaecati officiis harum corporis. Lorem ipsum
-            dolor, sit amet consectetur adipisicing elit. Numquam asperiores
-            iure obcaecati officiis harum corporis.
-          </Text>
+          <Text fontWeight="600">Nama Pelapor : {complaint.nama}</Text>
+          <Text isTruncated>{complaint.laporan}</Text>
           <Flex mt={2} align="center" direction={{ base: 'column', md: 'row' }}>
             <Alert
-              status={result.status}
+              status={checkStatus(complaint.status)}
               variant="left-accent"
               h={10}
               borderRadius="lg"
             >
               <AlertIcon />
-              {result.alert}
+              {checkAlert(complaint.status)}
             </Alert>
             <Button
               colorScheme="blue"
               mt={{ base: 2, md: 0 }}
               ml={{ base: 0, md: 4 }}
               w={{ base: '100%', md: '25%' }}
+              onClick={() => history.push(`/pengaduan/${complaint.id}`)}
             >
               Detail
             </Button>
@@ -63,4 +55,4 @@ const Result = () => {
   );
 };
 
-export default Result;
+export default withRouter(Result);

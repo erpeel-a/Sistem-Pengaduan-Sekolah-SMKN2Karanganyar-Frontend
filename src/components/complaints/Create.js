@@ -34,11 +34,11 @@ const Create = () => {
     no_telp: '',
     alamat: '',
     jenis_pengaduan: '',
-    tanggal_laporan: new Date(),
     laporan: '',
   };
 
   const [state, setState] = useState(defaultData);
+  const [date, setDate] = useState(new Date());
 
   const inputs = [
     {
@@ -81,14 +81,12 @@ const Create = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(state);
-    console.log(user.token);
     instance
       .post(
         '/pengaduan',
         {
           ...state,
-          tanggal_laporan: formatISO(new Date(state.tanggal_laporan), {
+          tanggal_laporan: formatISO(new Date(date), {
             representation: 'date',
           }),
         },
@@ -98,9 +96,12 @@ const Create = () => {
           },
         }
       )
-      .then(response => console.log(response))
+      .then(response => {
+        setState(defaultData);
+        setDate(new Date());
+        onOpen();
+      })
       .catch(error => console.log(error));
-    onOpen();
   };
 
   return (
@@ -146,8 +147,8 @@ const Create = () => {
               Tanggal Melapor
             </FormLabel>
             <DatePicker
-              selected={state.tanggal_laporan}
-              onChange={date => setState({ ...state, tanggal_laporan: date })}
+              selected={date}
+              onChange={date => setDate(date)}
               showPopperArrow={false}
             />
           </FormControl>

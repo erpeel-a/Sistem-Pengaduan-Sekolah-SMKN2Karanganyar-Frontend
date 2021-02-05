@@ -1,12 +1,50 @@
-import { Box, Button, Heading, VStack } from '@chakra-ui/react';
+import { useState, useEffect, useContext } from 'react';
+import { instance } from '../../apis/axios.instance';
+import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import CustomInput from '../layouts/CustomInput';
 import Result from './Result';
 
-const Search = () => {
+const Search = ({ history }) => {
+  const [complaints, setComplaints] = useState({});
+  const [keyword, setKeyword] = useState('');
+  const { user } = useContext(AuthContext);
+  const { pathname, search } = history.location;
+
+  useEffect(() => {
+    instance
+      .get(`${pathname}${search}`, {
+        headers: { Authorization: `Bearer ${user.token}` },
+      })
+      .then(response => {
+        const data = response.data.data;
+        setComplaints(data);
+      })
+      .catch(error => console.log(error));
+  }, [pathname, search, user]);
+
   const handleSubmit = e => {
     e.preventDefault();
-    alert('Pencarian Berhasil!');
+    instance
+      .get(`/pengaduan?judul_laporan=${keyword}`, {
+        headers: { Authorization: `Bearer ${user.token}` },
+      })
+      .then(response => {
+        const data = response.data.data;
+        setComplaints(data);
+      })
+      .catch(error => console.log(error));
   };
 
   return (
@@ -22,8 +60,10 @@ const Search = () => {
             Cari Pengaduan / Aspirasi
           </Heading>
           <CustomInput
-            label="Pencarian Berdasarkan Judul atau Masalah"
+            label="Pencarian Berdasarkan Judul Laporan"
             type="text"
+            value={keyword}
+            onChange={e => setKeyword(e.target.value)}
             required
           />
           <Button
@@ -46,7 +86,45 @@ const Search = () => {
           boxShadow="md"
           spacing={5}
         >
-          <Result />
+          <Result complaints={complaints} />
+          <Flex justify="space-between" align="center" w="100%">
+            {complaints && (
+              <Text>
+                Showing <b>{complaints.from}</b> to <b>{complaints.to}</b> of{' '}
+                <b>{complaints.total}</b> results
+              </Text>
+            )}
+            <HStack>
+              {complaints?.prev_page_url && (
+                <IconButton
+                  aria-label="Previous Page"
+                  icon={<ArrowLeftIcon />}
+                  borderRadius="xl"
+                  borderBottom="2px"
+                  borderBottomColor="blue.600"
+                  onClick={() =>
+                    history.push(
+                      `/pengaduan?page=${complaints.current_page - 1}`
+                    )
+                  }
+                />
+              )}
+              {complaints?.next_page_url && (
+                <IconButton
+                  aria-label="Next Page"
+                  icon={<ArrowRightIcon />}
+                  borderRadius="xl"
+                  borderBottom="2px"
+                  borderBottomColor="blue.600"
+                  onClick={() =>
+                    history.push(
+                      `/pengaduan?page=${complaints.current_page + 1}`
+                    )
+                  }
+                />
+              )}
+            </HStack>
+          </Flex>
         </VStack>
       </form>
     </Box>
