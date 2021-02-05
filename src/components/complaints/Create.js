@@ -81,7 +81,6 @@ const Create = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(state);
     instance
       .post(
         '/pengaduan',
@@ -98,7 +97,6 @@ const Create = () => {
         }
       )
       .then(response => {
-        console.log(response);
         setState(defaultData);
         setDate(new Date());
         onOpen();

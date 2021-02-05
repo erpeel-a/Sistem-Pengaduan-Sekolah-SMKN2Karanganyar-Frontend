@@ -7,6 +7,7 @@ import Homepage from './containers/Homepage';
 import Login from './containers/Login';
 import Create from './components/complaints/Create';
 import Search from './components/complaints/Search';
+import Detail from './components/complaints/Detail';
 import Footer from './components/sections/Footer';
 
 const breakpoints = createBreakpoints({
@@ -31,8 +32,9 @@ function App() {
       <Switch>
         <Route path="/" exact component={Homepage} />
         <Route path="/login" component={Login} />
-        <Route path="/create" component={Create} />
-        <Route path="/search" component={Search} />
+        <Route path="/buat" component={Create} />
+        <Route path="/pengaduan/:id" component={Detail} />
+        <Route path="/pengaduan" component={Search} />
       </Switch>
       <Footer />
     </ChakraProvider>

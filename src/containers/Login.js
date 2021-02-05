@@ -18,8 +18,8 @@ import { AuthContext } from '../contexts/AuthContext';
 const Login = ({ history }) => {
   const [show, setShow] = useState(false);
   const [state, setState] = useState({
-    email: 'hendra@dev.id',
-    password: 'password',
+    email: '',
+    password: '',
   });
   const { setUser } = useContext(AuthContext);
   const toast = useToast();
@@ -50,7 +50,6 @@ const Login = ({ history }) => {
           isClosable: true,
         });
       });
-    console.log(state);
   };
 
   return (

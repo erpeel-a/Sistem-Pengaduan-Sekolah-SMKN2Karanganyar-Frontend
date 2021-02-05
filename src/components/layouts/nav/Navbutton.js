@@ -6,7 +6,7 @@ const Navbutton = ({ user, clearUser, history }) => {
 
   const handleSearchButton = () => {
     if (user) {
-      history.push('/search');
+      history.push('/pengaduan');
     } else {
       history.push('/login');
       toast({

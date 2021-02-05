@@ -21,7 +21,7 @@ const Home = ({ history }) => {
 
   const handleClick = () => {
     if (user) {
-      history.push('/create');
+      history.push('/buat');
     } else {
       history.push('/login');
       toast({
