@@ -39,6 +39,7 @@ const Create = () => {
 
   const [state, setState] = useState(defaultData);
   const [date, setDate] = useState(new Date());
+  const [file, setFile] = useState(null);
 
   const inputs = [
     {
@@ -81,21 +82,40 @@ const Create = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    const {
+      alamat,
+      email,
+      jenis_pengaduan,
+      judul_laporan,
+      laporan,
+      nama,
+      no_telp,
+      nomor_induk,
+    } = state;
+    const tanggal_laporan = formatISO(new Date(date), {
+      representation: 'date',
+    });
+
+    let formData = new FormData();
+    formData.append('alamat', alamat);
+    formData.append('berkas_pendukung', file);
+    formData.append('email', email);
+    formData.append('jenis_pengaduan', jenis_pengaduan);
+    formData.append('judul_laporan', judul_laporan);
+    formData.append('laporan', laporan);
+    formData.append('nama', nama);
+    formData.append('no_telp', no_telp);
+    formData.append('nomor_induk', nomor_induk);
+    formData.append('tanggal_laporan', tanggal_laporan);
+
     instance
-      .post(
-        '/pengaduan',
-        {
-          ...state,
-          tanggal_laporan: formatISO(new Date(date), {
-            representation: 'date',
-          }),
+      .post('/pengaduan', formData, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'multipart/form-data',
         },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      )
+      })
       .then(() => {
         setState(defaultData);
         setDate(new Date());
@@ -106,7 +126,7 @@ const Create = () => {
 
   return (
     <Box pt={40} pb={5} px={{ base: 5, md: 20 }} bgColor="gray.100">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <VStack
           px={{ base: 5, md: 10 }}
           bgColor="white"
@@ -124,6 +144,7 @@ const Create = () => {
               readOnly={input.readOnly}
               value={input.value}
               onChange={input.change}
+              required
               useLabel
             />
           ))}
@@ -164,6 +185,13 @@ const Create = () => {
               size={!isTablet ? 'md' : 'lg'}
             />
           </FormControl>
+          <CustomInput
+            pt={{ base: '4px', md: '6px' }}
+            label="Berkas / File Pendukung"
+            type="file"
+            onChange={e => setFile(e.target.files[0])}
+            useLabel
+          />
           <Button
             type="submit"
             colorScheme="blue"

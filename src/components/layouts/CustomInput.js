@@ -2,14 +2,24 @@ import { FormControl, FormLabel, Input, useMediaQuery } from '@chakra-ui/react';
 
 const CustomInput = props => {
   const [isTablet] = useMediaQuery('(min-width: 768px)');
-  const { label, type, value, readOnly, onChange, useLabel } = props;
+  const {
+    pt,
+    label,
+    type,
+    value,
+    readOnly,
+    onChange,
+    useLabel,
+    required,
+  } = props;
 
   return (
-    <FormControl mb={2} isRequired>
+    <FormControl mb={2} isRequired={required}>
       {useLabel && (
         <FormLabel fontSize={{ base: 'md', md: 'lg' }}>{label}</FormLabel>
       )}
       <Input
+        pt={pt}
         size={!isTablet ? 'md' : 'lg'}
         type={type}
         placeholder={label}
