@@ -28,7 +28,7 @@ const Home = ({ history }) => {
         position: 'top',
         title: 'Silahkan Login Terlebih Dahulu!',
         status: 'warning',
-        duration: 5000,
+        duration: 4000,
         isClosable: true,
       });
     }

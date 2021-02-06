@@ -96,7 +96,7 @@ const Create = () => {
           },
         }
       )
-      .then(response => {
+      .then(() => {
         setState(defaultData);
         setDate(new Date());
         onOpen();

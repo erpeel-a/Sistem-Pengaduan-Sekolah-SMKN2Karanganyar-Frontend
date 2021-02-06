@@ -14,7 +14,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import Navlinks from './Navlinks';
 import Navbutton from './Navbutton';
 
-const Drawer = ({ user, clearUser }) => {
+const Drawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -37,7 +37,7 @@ const Drawer = ({ user, clearUser }) => {
             <DrawerCloseButton />
             <DrawerBody>
               <Navlinks />
-              <Navbutton user={user} clearUser={clearUser} />
+              <Navbutton />
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>

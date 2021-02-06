@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import { Button, ButtonGroup, useToast } from '@chakra-ui/react';
 import { withRouter } from 'react-router-dom';
+import { instance } from '../../../apis/axios.instance';
+import { AuthContext } from '../../../contexts/AuthContext';
 
-const Navbutton = ({ user, clearUser, history }) => {
+const Navbutton = ({ history }) => {
+  const { user } = useContext(AuthContext);
   const toast = useToast();
 
   const handleSearchButton = () => {
@@ -13,7 +17,7 @@ const Navbutton = ({ user, clearUser, history }) => {
         position: 'top',
         title: 'Silahkan Login Terlebih Dahulu!',
         status: 'warning',
-        duration: 5000,
+        duration: 4000,
         isClosable: true,
       });
     }
@@ -21,8 +25,32 @@ const Navbutton = ({ user, clearUser, history }) => {
 
   const handleClick = () => {
     if (user) {
-      history.push('/');
-      clearUser();
+      instance
+        .post(
+          '/logout',
+          { email: user.email, password: user.password },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        )
+        .then(response => {
+          console.log(response);
+          toast({
+            position: 'top',
+            title: 'Logout Berhasil!',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
+          sessionStorage.removeItem('user');
+          history.push('/');
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        })
+        .catch(error => console.log(error));
     } else {
       history.push('/login');
     }

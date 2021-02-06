@@ -1,7 +1,5 @@
-import { useContext } from 'react';
 import { Flex, Box, Image, useMediaQuery } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext';
 
 import Navlinks from './Navlinks';
 import Navbutton from './Navbutton';
@@ -9,7 +7,6 @@ import Drawer from './Drawer';
 
 const Navbar = () => {
   const [isLaptop] = useMediaQuery('(min-width: 960px)');
-  const { user, clearUser } = useContext(AuthContext);
 
   return (
     <Flex
@@ -37,9 +34,9 @@ const Navbar = () => {
           />
         </Link>
       </Box>
-      {!isLaptop && <Drawer user={user} clearUser={clearUser} />}
+      {!isLaptop && <Drawer />}
       {isLaptop && <Navlinks />}
-      {isLaptop && <Navbutton user={user} clearUser={clearUser} />}
+      {isLaptop && <Navbutton />}
     </Flex>
   );
 };

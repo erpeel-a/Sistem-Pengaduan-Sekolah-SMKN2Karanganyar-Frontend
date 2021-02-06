@@ -36,7 +36,7 @@ const Login = ({ history }) => {
           position: 'top',
           title: 'Login Berhasil!',
           status: 'success',
-          duration: 5000,
+          duration: 4000,
           isClosable: true,
         });
         history.push('/');
@@ -46,7 +46,7 @@ const Login = ({ history }) => {
           position: 'top',
           title: 'Email atau Password Salah!',
           status: 'error',
-          duration: 5000,
+          duration: 4000,
           isClosable: true,
         });
       });
