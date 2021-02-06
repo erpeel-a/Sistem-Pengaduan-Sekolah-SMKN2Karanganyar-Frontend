@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom';
 import {
   Button,
   VStack,
@@ -11,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactComponent as Illustration } from '../../assets/images/success-illustration.svg';
 
-const Success = ({ isOpen, onClose }) => (
+const Success = ({ isOpen, onClose, history }) => (
   <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
     <ModalOverlay />
     <ModalContent>
@@ -30,7 +31,14 @@ const Success = ({ isOpen, onClose }) => (
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button
+            colorScheme="blue"
+            mr={3}
+            onClick={() => {
+              onClose();
+              history.push('/');
+            }}
+          >
             Tutup
           </Button>
         </ModalFooter>
@@ -39,4 +47,4 @@ const Success = ({ isOpen, onClose }) => (
   </Modal>
 );
 
-export default Success;
+export default withRouter(Success);

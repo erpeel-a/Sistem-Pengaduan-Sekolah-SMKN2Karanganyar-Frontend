@@ -39,7 +39,7 @@ const Create = () => {
 
   const [state, setState] = useState(defaultData);
   const [date, setDate] = useState(new Date());
-  const [choosenFile, setChoosenFile] = useState(null);
+  const [file, setFile] = useState(null);
 
   const inputs = [
     {
@@ -83,33 +83,39 @@ const Create = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    let file = choosenFile;
-    let formData = new FormData();
-    if (file) {
-      formData.append('nama', state.nama);
-      formData.append('berkas_pendukung[]', file, file.name);
-    }
+    const {
+      alamat,
+      email,
+      jenis_pengaduan,
+      judul_laporan,
+      laporan,
+      nama,
+      no_telp,
+      nomor_induk,
+    } = state;
+    const tanggal_laporan = formatISO(new Date(date), {
+      representation: 'date',
+    });
 
-    console.log(choosenFile);
-    console.log(file);
-    console.log(formData);
+    let formData = new FormData();
+    formData.append('alamat', alamat);
+    formData.append('berkas_pendukung', file);
+    formData.append('email', email);
+    formData.append('jenis_pengaduan', jenis_pengaduan);
+    formData.append('judul_laporan', judul_laporan);
+    formData.append('laporan', laporan);
+    formData.append('nama', nama);
+    formData.append('no_telp', no_telp);
+    formData.append('nomor_induk', nomor_induk);
+    formData.append('tanggal_laporan', tanggal_laporan);
 
     instance
-      .post(
-        '/pengaduan',
-        {
-          ...state,
-          tanggal_laporan: formatISO(new Date(date), {
-            representation: 'date',
-          }),
-          berkas_pendukung: formData,
+      .post('/pengaduan', formData, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'multipart/form-data',
         },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      )
+      })
       .then(() => {
         setState(defaultData);
         setDate(new Date());
@@ -183,7 +189,7 @@ const Create = () => {
             pt={{ base: '4px', md: '6px' }}
             label="Berkas / File Pendukung"
             type="file"
-            onChange={e => setChoosenFile(e.target.files[0])}
+            onChange={e => setFile(e.target.files[0])}
             useLabel
           />
           <Button
