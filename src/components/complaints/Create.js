@@ -39,6 +39,7 @@ const Create = () => {
 
   const [state, setState] = useState(defaultData);
   const [date, setDate] = useState(new Date());
+  const [choosenFile, setChoosenFile] = useState(null);
 
   const inputs = [
     {
@@ -81,6 +82,18 @@ const Create = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    let file = choosenFile;
+    let formData = new FormData();
+    if (file) {
+      formData.append('nama', state.nama);
+      formData.append('berkas_pendukung[]', file, file.name);
+    }
+
+    console.log(choosenFile);
+    console.log(file);
+    console.log(formData);
+
     instance
       .post(
         '/pengaduan',
@@ -89,6 +102,7 @@ const Create = () => {
           tanggal_laporan: formatISO(new Date(date), {
             representation: 'date',
           }),
+          berkas_pendukung: formData,
         },
         {
           headers: {
@@ -106,7 +120,7 @@ const Create = () => {
 
   return (
     <Box pt={40} pb={5} px={{ base: 5, md: 20 }} bgColor="gray.100">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <VStack
           px={{ base: 5, md: 10 }}
           bgColor="white"
@@ -124,6 +138,7 @@ const Create = () => {
               readOnly={input.readOnly}
               value={input.value}
               onChange={input.change}
+              required
               useLabel
             />
           ))}
@@ -164,6 +179,13 @@ const Create = () => {
               size={!isTablet ? 'md' : 'lg'}
             />
           </FormControl>
+          <CustomInput
+            pt={{ base: '4px', md: '6px' }}
+            label="Berkas / File Pendukung"
+            type="file"
+            onChange={e => setChoosenFile(e.target.files[0])}
+            useLabel
+          />
           <Button
             type="submit"
             colorScheme="blue"
