@@ -12,7 +12,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { AuthContext } from '../../contexts/AuthContext';
-import { checkAlert, checkStatus } from '../layouts/Check';
+import { checkAlert, checkStatus } from '../../utils/Check';
 
 const Detail = ({ history, match }) => {
   const { user } = useContext(AuthContext);

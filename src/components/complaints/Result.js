@@ -8,7 +8,7 @@ import {
   Flex,
   Text,
 } from '@chakra-ui/react';
-import { checkAlert, checkStatus } from '../layouts/Check';
+import { checkAlert, checkStatus } from '../../utils/Check';
 
 const Result = ({ history, complaints }) => {
   return (
