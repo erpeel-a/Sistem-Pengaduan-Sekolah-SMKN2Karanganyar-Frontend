@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { instance } from '../../apis/axios.instance';
 import { Box, Button, Divider, Heading, Text, VStack } from '@chakra-ui/react';
 import { format } from 'date-fns';
+import nl2br from 'react-nl2br';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import FooterCard from '../layouts/FooterCard';
@@ -67,7 +68,7 @@ const Detail = ({ history, match }) => {
               <Text fontWeight="600" fontSize="lg">
                 Nama Pelapor : {complaint.nama}
               </Text>
-              <Text my={2}>{complaint.laporan}</Text>
+              <Text my={2}>{nl2br(complaint.laporan)}</Text>
               {complaint.berkas_pendukung ? (
                 <Button colorScheme="blue" fontWeight="400">
                   <a
@@ -91,7 +92,7 @@ const Detail = ({ history, match }) => {
                   <Text mb={2} fontWeight="600" fontSize="lg">
                     Yang Menanggapi : {feedback.user.name}
                   </Text>
-                  <Text>{feedback.tanggapan}</Text>
+                  <Text>{nl2br(feedback.tanggapan)}</Text>
                 </>
               ) : (
                 <Text>Belum ada tanggapan</Text>
