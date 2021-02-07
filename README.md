@@ -11,7 +11,8 @@
 2. Also [this repository](https://github.com/erpeel-a/Sistem-Pengaduan-Sekolah-SMKN2Karanganyar) for the backend to provide API. Follow instructions in that repository.
 3. Install all dependencies. <br>
    `yarn install` or only `yarn`
-4. Run the development server. <br>
+4. Make file `.env` and set `REACT_APP_API_URL` inside that file.
+5. Run the development server. <br>
    `yarn start`
 
 ### Tech Used
