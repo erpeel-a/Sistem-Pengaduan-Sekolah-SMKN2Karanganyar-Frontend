@@ -25,12 +25,12 @@ const About = () => {
           lineHeight={7}
           textAlign="center"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-          ullamcorper ligula id est pharetra, at facilisis nulla lacinia.
-          Pellentesque erat nibh, porta eu efficitur eget, finibus eget ligula.
-          Duis nec tempor ante. Proin fermentum, ligula non congue mattis,
-          lectus nunc luctus urna, ut suscipit felis erat mollis dui. Maecenas
-          libero.
+          <Text fontWeight="600">
+            Sistem Layanan Pengaduan & Aspirasi SMKN 2 Karanganyar
+          </Text>{' '}
+          ini dibuat untuk menampung pengaduan & aspirasi dari semua warga SMKN
+          2 Karanganyar. Diharapkan dengan sistem ini semua warga sekolah dapat
+          lebih mudah untuk melaporkan pengaduan & aspirasi untuk sekolah.
         </Text>
       </Box>
     </Flex>
