@@ -2,6 +2,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import { Switch, Route } from 'react-router-dom';
 import ScrollToTop from './utils/Scroll';
+import Fonts from './Fonts';
 
 import Navbar from './components/layouts/nav/Navbar';
 import Homepage from './containers/Homepage';
@@ -29,6 +30,7 @@ const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
+      <Fonts />
       <ScrollToTop />
       <Navbar />
       <Switch>

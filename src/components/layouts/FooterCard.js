@@ -15,6 +15,8 @@ const FooterCard = ({ children, history, complaint, push, buttonTitle }) => {
       <Alert
         status={checkStatus(complaint.status)}
         variant="left-accent"
+        mt={{ base: 2, md: 0 }}
+        ml={{ base: 0, md: 4 }}
         h={10}
         borderRadius="lg"
       >
