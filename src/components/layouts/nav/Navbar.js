@@ -25,7 +25,7 @@ const Navbar = () => {
       boxShadow="sm"
       zIndex="docked"
     >
-      <Box boxSize="xs" mt={{ base: 280, lg: 260 }}>
+      <Box boxSize="xs" pt={{ base: 455, lg: 260 }} mb={{ base: 500, lg: 260 }}>
         <Link to="/">
           <Image
             src="/images/index.png"

@@ -1,18 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import { instance } from '../../apis/axios.instance';
-import {
-  Alert,
-  AlertIcon,
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Button, Divider, Heading, Text, VStack } from '@chakra-ui/react';
+import { format } from 'date-fns';
 import { AuthContext } from '../../contexts/AuthContext';
-import { checkAlert, checkStatus } from '../../utils/Check';
+
+import FooterCard from '../layouts/FooterCard';
 
 const Detail = ({ history, match }) => {
   const { user } = useContext(AuthContext);
@@ -69,44 +61,52 @@ const Detail = ({ history, match }) => {
               <Heading as="h2" size="lg">
                 {complaint.judul_laporan}
               </Heading>
+              <Text fontWeight="600" fontSize="lg" textTransform="capitalize">
+                Jenis : {complaint.jenis_pengaduan}
+              </Text>
               <Text fontWeight="600" fontSize="lg">
                 Nama Pelapor : {complaint.nama}
               </Text>
+              <Text my={2}>{complaint.laporan}</Text>
+              {complaint.berkas_pendukung ? (
+                <Button colorScheme="blue" fontWeight="400">
+                  <a
+                    href={`${process.env.REACT_APP_BACKEND_URL}${complaint.berkas_pendukung}`}
+                    download
+                  >
+                    Download Berkas
+                  </a>
+                </Button>
+              ) : (
+                <Button colorScheme="blue" fontWeight="400" isDisabled>
+                  Tidak Ada Berkas
+                </Button>
+              )}
               <Divider my={2} />
-              <Text>{complaint.laporan}</Text>
-              <Divider my={2} />
-              <Text fontWeight="600" fontSize="lg">
+              <Heading as="h2" size="md" mb={2}>
                 Tanggapan
-              </Text>
+              </Heading>
               {feedback?.tanggapan ? (
-                <Text>{feedback.tanggapan}</Text>
+                <>
+                  <Text mb={2} fontWeight="600" fontSize="lg">
+                    Yang Menanggapi : {feedback.user.name}
+                  </Text>
+                  <Text>{feedback.tanggapan}</Text>
+                </>
               ) : (
                 <Text>Belum ada tanggapan</Text>
               )}
-              <Flex
-                mt={2}
-                align="center"
-                direction={{ base: 'column', md: 'row' }}
+              <FooterCard
+                history={history}
+                complaint={complaint}
+                push={'/pengaduan'}
+                buttonTitle="Kembali"
               >
-                <Alert
-                  status={checkStatus(complaint.status)}
-                  variant="left-accent"
-                  h={10}
-                  borderRadius="lg"
-                >
-                  <AlertIcon />
-                  {checkAlert(complaint.status)}
-                </Alert>
-                <Button
-                  colorScheme="blue"
-                  mt={{ base: 2, md: 0 }}
-                  ml={{ base: 0, md: 4 }}
-                  w={{ base: '100%', md: '25%' }}
-                  onClick={() => history.push('/pengaduan')}
-                >
-                  Kembali
-                </Button>
-              </Flex>
+                <Text>
+                  {complaint.tanggal_laporan &&
+                    format(new Date(complaint.tanggal_laporan), 'dd MMM yyyy')}
+                </Text>
+              </FooterCard>
             </Box>
           </VStack>
         </Box>

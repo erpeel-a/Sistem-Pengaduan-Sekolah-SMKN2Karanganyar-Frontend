@@ -27,10 +27,7 @@ const Search = ({ history }) => {
       .get(`${pathname}${search}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
-      .then(response => {
-        const data = response.data.data;
-        setComplaints(data);
-      })
+      .then(response => setComplaints(response.data.data))
       .catch(error => console.log(error));
   }, [pathname, search, user]);
 
@@ -40,10 +37,7 @@ const Search = ({ history }) => {
       .get(`/pengaduan?judul_laporan=${keyword}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
-      .then(response => {
-        const data = response.data.data;
-        setComplaints(data);
-      })
+      .then(response => setComplaints(response.data.data))
       .catch(error => console.log(error));
   };
 
