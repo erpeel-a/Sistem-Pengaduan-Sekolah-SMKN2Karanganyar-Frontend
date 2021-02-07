@@ -25,9 +25,7 @@ const About = () => {
           lineHeight={7}
           textAlign="center"
         >
-          <Text fontWeight="600">
-            Sistem Layanan Pengaduan & Aspirasi SMKN 2 Karanganyar
-          </Text>{' '}
+          <b>Sistem Layanan Pengaduan & Aspirasi SMKN 2 Karanganyar </b>
           ini dibuat untuk menampung pengaduan & aspirasi dari semua warga SMKN
           2 Karanganyar. Diharapkan dengan sistem ini semua warga sekolah dapat
           lebih mudah untuk melaporkan pengaduan & aspirasi untuk sekolah.

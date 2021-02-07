@@ -12,6 +12,7 @@ import {
   VStack,
   useMediaQuery,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -25,6 +26,7 @@ const Create = () => {
   const [isTablet] = useMediaQuery('(min-width: 768px)');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useContext(AuthContext);
+  const toast = useToast();
 
   const defaultData = {
     judul_laporan: '',
@@ -121,7 +123,18 @@ const Create = () => {
         setDate(new Date());
         onOpen();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        const noTelpErr = error.response.data.data.no_telp;
+        noTelpErr &&
+          toast({
+            position: 'top',
+            title: noTelpErr[0],
+            status: 'error',
+            duration: 4000,
+            isClosable: true,
+          });
+      });
   };
 
   return (
@@ -190,6 +203,7 @@ const Create = () => {
             label="Berkas / File Pendukung"
             type="file"
             onChange={e => setFile(e.target.files[0])}
+            accept=".doc, .docx, .pdf, image/*"
             useLabel
           />
           <Button

@@ -11,6 +11,7 @@ const CustomInput = props => {
     onChange,
     useLabel,
     required,
+    accept,
   } = props;
 
   return (
@@ -26,6 +27,7 @@ const CustomInput = props => {
         value={value}
         onChange={onChange}
         isReadOnly={readOnly}
+        accept={accept}
       />
     </FormControl>
   );
