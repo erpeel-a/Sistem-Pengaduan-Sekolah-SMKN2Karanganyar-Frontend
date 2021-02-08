@@ -28,7 +28,7 @@ const Navbar = () => {
       <Box boxSize="xs" pt={{ base: 455, lg: 260 }} mb={{ base: 500, lg: 260 }}>
         <Link to="/">
           <Image
-            src="/images/index.png"
+            src="/images/smkn2kra-logo.png"
             alt="SMKN 2 Karanganyar's Logo"
             h={{ base: 10, lg: 50 }}
           />

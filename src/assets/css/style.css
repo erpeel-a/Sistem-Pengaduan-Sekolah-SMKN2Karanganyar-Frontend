@@ -1,3 +1,17 @@
 html {
   scroll-behavior: smooth;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2b6cb0;
+  border-radius: 8px;
+  border: 2px solid #fff;
+}

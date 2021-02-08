@@ -2,7 +2,7 @@
 
 ## Preview
 
-![preview](public/images/preview.png)
+![Mockup](images/mockup.png)
 
 ### How To Run This App
 
