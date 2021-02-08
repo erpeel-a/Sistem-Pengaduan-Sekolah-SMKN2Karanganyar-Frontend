@@ -1,10 +1,11 @@
 import { withRouter } from 'react-router-dom';
 import { Box, Heading, Flex, Text } from '@chakra-ui/react';
 import { format } from 'date-fns';
+import { checkLink, checkTitle } from '../../utils/Check';
 
 import FooterCard from '../layouts/FooterCard';
 
-const Result = ({ history, complaints }) => (
+const Result = ({ history, complaints, email }) => (
   <>
     {complaints?.data?.map(complaint => (
       <Box
@@ -48,8 +49,13 @@ const Result = ({ history, complaints }) => (
         <FooterCard
           history={history}
           complaint={complaint}
-          push={`/pengaduan/${complaint.id}`}
-          buttonTitle="Detail"
+          push={checkLink(
+            complaint.id,
+            complaint.email,
+            complaint.status,
+            email
+          )}
+          buttonTitle={checkTitle(complaint.email, complaint.status, email)}
         >
           <Text>
             {format(new Date(complaint.tanggal_laporan), 'dd MMM yyyy')}

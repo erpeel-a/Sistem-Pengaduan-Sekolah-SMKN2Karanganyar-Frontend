@@ -8,6 +8,7 @@ import Navbar from './components/layouts/nav/Navbar';
 import Homepage from './containers/Homepage';
 import Login from './containers/Login';
 import Create from './components/complaints/Create';
+import Edit from './components/complaints/Edit';
 import Search from './components/complaints/Search';
 import Detail from './components/complaints/Detail';
 import Footer from './components/sections/Footer';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" exact component={Homepage} />
         <Route path="/login" component={Login} />
         <Route path="/buat" component={Create} />
+        <Route path="/pengaduan/:id/ubah" component={Edit} />
         <Route path="/pengaduan/:id" component={Detail} />
         <Route path="/pengaduan" component={Search} />
       </Switch>

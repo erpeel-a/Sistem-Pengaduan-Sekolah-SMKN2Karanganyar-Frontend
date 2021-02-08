@@ -80,7 +80,7 @@ const Search = ({ history }) => {
           boxShadow="md"
           spacing={5}
         >
-          <Result complaints={complaints} />
+          <Result complaints={complaints} email={user.email} />
           <Flex justify="space-between" align="center" w="100%">
             {complaints && (
               <Text>

@@ -21,3 +21,19 @@ export const checkAlert = statusData => {
   }
   return alert;
 };
+
+export const checkLink = (complaintId, complaintEmail, status, userEmail) => {
+  let link = `/pengaduan/${complaintId}`;
+  if (complaintEmail === userEmail && status === 'pending') {
+    link = `/pengaduan/${complaintId}/ubah`;
+  }
+  return link;
+};
+
+export const checkTitle = (complaintEmail, status, userEmail) => {
+  let title = 'Detail';
+  if (complaintEmail === userEmail && status === 'pending') {
+    title = 'Ubah';
+  }
+  return title;
+};
