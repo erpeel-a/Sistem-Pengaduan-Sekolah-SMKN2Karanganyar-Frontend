@@ -15,10 +15,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 import CustomInput from '../layouts/CustomInput';
 import Result from './Result';
+import Spinner from '../layouts/Spinner';
 
 const Search = ({ history }) => {
   const [complaints, setComplaints] = useState({});
   const [keyword, setKeyword] = useState('');
+  const [load, setLoad] = useState(true);
   const { user } = useContext(AuthContext);
   const { pathname, search } = history.location;
 
@@ -27,17 +29,24 @@ const Search = ({ history }) => {
       .get(`${pathname}${search}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
-      .then(response => setComplaints(response.data.data))
+      .then(response => {
+        setLoad(false);
+        setComplaints(response.data.data);
+      })
       .catch(error => console.log(error));
   }, [pathname, search, user]);
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoad(true);
     instance
       .get(`/pengaduan?judul_laporan=${keyword}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
-      .then(response => setComplaints(response.data.data))
+      .then(response => {
+        setLoad(false);
+        setComplaints(response.data.data);
+      })
       .catch(error => console.log(error));
   };
 
@@ -67,6 +76,7 @@ const Search = ({ history }) => {
             py={7}
             w="100%"
             fontSize={{ base: 'md', md: 'lg' }}
+            isLoading={load}
           >
             Cari
           </Button>
@@ -80,7 +90,11 @@ const Search = ({ history }) => {
           boxShadow="md"
           spacing={5}
         >
-          <Result complaints={complaints} email={user.email} />
+          {load ? (
+            <Spinner />
+          ) : (
+            <Result complaints={complaints} email={user.email} />
+          )}
           <Flex justify="space-between" align="center" w="100%">
             {complaints && (
               <Text>
@@ -96,11 +110,12 @@ const Search = ({ history }) => {
                   borderRadius="xl"
                   borderBottom="2px"
                   borderBottomColor="blue.600"
-                  onClick={() =>
+                  onClick={() => {
                     history.push(
                       `/pengaduan?page=${complaints.current_page - 1}`
-                    )
-                  }
+                    );
+                    setLoad(true);
+                  }}
                 />
               )}
               {complaints?.next_page_url && (
@@ -110,11 +125,12 @@ const Search = ({ history }) => {
                   borderRadius="xl"
                   borderBottom="2px"
                   borderBottomColor="blue.600"
-                  onClick={() =>
+                  onClick={() => {
                     history.push(
                       `/pengaduan?page=${complaints.current_page + 1}`
-                    )
-                  }
+                    );
+                    setLoad(true);
+                  }}
                 />
               )}
             </HStack>

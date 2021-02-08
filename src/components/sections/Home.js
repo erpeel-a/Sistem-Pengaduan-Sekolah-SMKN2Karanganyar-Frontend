@@ -19,6 +19,17 @@ const Home = ({ history }) => {
   const { user } = useContext(AuthContext);
   const toast = useToast();
 
+  const learnMoreClick = () => {
+    toast({
+      position: 'top',
+      title: 'Silahkan Scroll ke Bawah',
+      description: 'Untuk Informasi Lebih Lanjut 😊',
+      status: 'info',
+      duration: 4000,
+      isClosable: true,
+    });
+  };
+
   const handleClick = () => {
     if (user) {
       history.push('/buat');
@@ -63,6 +74,7 @@ const Home = ({ history }) => {
             colorScheme="gray"
             borderBottom="2px"
             borderColor="gray.300"
+            onClick={learnMoreClick}
           >
             Pelajari Selengkapnya
           </Button>

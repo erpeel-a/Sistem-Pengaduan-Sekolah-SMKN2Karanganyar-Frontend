@@ -30,6 +30,7 @@ const Edit = ({ match, history }) => {
   const [state, setState] = useState({});
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     instance
@@ -81,6 +82,7 @@ const Edit = ({ match, history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoad(true);
 
     const {
       alamat,
@@ -120,6 +122,7 @@ const Edit = ({ match, history }) => {
         },
       })
       .then(() => {
+        setLoad(false);
         history.push('/pengaduan');
         toast({
           position: 'top',
@@ -130,6 +133,7 @@ const Edit = ({ match, history }) => {
         });
       })
       .catch(error => {
+        setLoad(false);
         console.log(error);
         error?.response?.data?.data?.no_telp &&
           toast({
@@ -249,6 +253,7 @@ const Edit = ({ match, history }) => {
               py={7}
               w="50%"
               fontSize={{ base: 'md', md: 'lg' }}
+              isLoading={load}
             >
               Kirim
             </Button>

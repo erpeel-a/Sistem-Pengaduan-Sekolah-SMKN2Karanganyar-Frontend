@@ -43,6 +43,7 @@ const Create = () => {
   const [state, setState] = useState(defaultData);
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
+  const [load, setLoad] = useState(false);
 
   const inputs = [
     {
@@ -85,6 +86,7 @@ const Create = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoad(true);
 
     const {
       alamat,
@@ -120,11 +122,13 @@ const Create = () => {
         },
       })
       .then(() => {
+        setLoad(false);
         setState(defaultData);
         setDate(new Date());
         onOpen();
       })
       .catch(error => {
+        setLoad(false);
         console.log(error);
         error?.response?.data?.data?.no_telp &&
           toast({
@@ -226,6 +230,7 @@ const Create = () => {
               py={7}
               w="50%"
               fontSize={{ base: 'md', md: 'lg' }}
+              isLoading={load}
             >
               Kirim
             </Button>

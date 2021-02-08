@@ -17,6 +17,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 const Login = ({ history }) => {
   const [show, setShow] = useState(false);
+  const [load, setLoad] = useState(false);
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -26,12 +27,14 @@ const Login = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoad(true);
     instance
       .post('/login', { email: state.email, password: state.password })
       .then(response => {
         const { email, name, nomor_induk } = response.data.user;
         const token = response.data.token;
         setUser({ email, name, nomor_induk, token });
+        setLoad(false);
         toast({
           position: 'top',
           title: 'Login Berhasil!',
@@ -42,6 +45,7 @@ const Login = ({ history }) => {
         history.push('/');
       })
       .catch(() => {
+        setLoad(false);
         toast({
           position: 'top',
           title: 'Email atau Password Salah!',
@@ -123,6 +127,7 @@ const Login = ({ history }) => {
             py={6}
             w="100%"
             fontSize={{ base: 'md', xl: 'lg' }}
+            isLoading={load}
           >
             Login
           </Button>
