@@ -11,7 +11,7 @@ const Accordion = () => {
   const faqs = [
     {
       title: 'Apa itu Aplikasi Pengaduan SMKN 2 Karanganyar ?',
-      content: `Seperti yang sudah dijelaskan diatas tadi, aplikasi ini dibuat untuk menampung pengaduan & aspirasi dari semua warga SMKN2 Karanganyar.`,
+      content: `Seperti yang sudah dijelaskan diatas tadi, aplikasi ini dibuat untuk menampung pengaduan & aspirasi dari semua warga SMKN 2 Karanganyar.`,
     },
     {
       title:

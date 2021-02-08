@@ -35,12 +35,12 @@ const Flow = () => {
     {
       icon: <FiSend />,
       title: '5. Kirim Pengaduan',
-      content: `Kirim pengaduan agar nantinya bisa dicek oleh petugas dari sekolah.`,
+      content: `Kirim pengaduan agar nantinya bisa dicek dan ditanggapi oleh petugas dari sekolah.`,
     },
     {
       icon: <FiCheckCircle />,
       title: '6. Tunggu Konfirmasi',
-      content: `Jika laporan sudah diterima dan ditanggapi, pemberitahuan akan dikirimkan melalui email yang digunakan.`,
+      content: `Jika laporan sudah dicek dan ditanggapi, pemberitahuan akan dikirimkan melalui email yang digunakan.`,
     },
   ];
 
