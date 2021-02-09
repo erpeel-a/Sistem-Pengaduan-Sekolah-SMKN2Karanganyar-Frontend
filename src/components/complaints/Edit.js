@@ -31,13 +31,20 @@ const Edit = ({ match, history }) => {
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
   const [load, setLoad] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     instance
       .get(`/pengaduan/${match.params.id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
-      .then(response => setState(response.data.data))
+      .then(response => {
+        const data = response.data.data;
+        setState(data);
+        if (data?.status === 'pending' && data?.email === user.email) {
+          setDisabled(false);
+        }
+      })
       .catch(error => console.log(error));
   }, [match, user]);
 
@@ -254,6 +261,7 @@ const Edit = ({ match, history }) => {
               w="50%"
               fontSize={{ base: 'md', md: 'lg' }}
               isLoading={load}
+              isDisabled={disabled}
             >
               Kirim
             </Button>

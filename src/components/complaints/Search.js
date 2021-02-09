@@ -116,6 +116,7 @@ const Search = ({ history }) => {
                     );
                     setLoad(true);
                   }}
+                  isLoading={load}
                 />
               )}
               {complaints?.next_page_url && (
@@ -131,6 +132,7 @@ const Search = ({ history }) => {
                     );
                     setLoad(true);
                   }}
+                  isLoading={load}
                 />
               )}
             </HStack>

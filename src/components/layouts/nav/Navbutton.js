@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Button, ButtonGroup, useToast } from '@chakra-ui/react';
 import { withRouter } from 'react-router-dom';
 import { instance } from '../../../apis/axios.instance';
@@ -6,6 +6,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 
 const Navbutton = ({ history }) => {
   const { user } = useContext(AuthContext);
+  const [load, setLoad] = useState(false);
   const toast = useToast();
 
   const handleSearchButton = () => {
@@ -25,16 +26,13 @@ const Navbutton = ({ history }) => {
 
   const handleClick = () => {
     if (user) {
+      setLoad(true);
       instance
-        .post(
-          '/logout',
-          { email: user.email, password: user.password },
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        )
+        .post('/logout', {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
         .then(response => {
           console.log(response);
           toast({
@@ -47,6 +45,7 @@ const Navbutton = ({ history }) => {
           sessionStorage.removeItem('user');
           history.push('/');
           setTimeout(() => {
+            setLoad(false);
             window.location.reload();
           }, 2000);
         })
@@ -77,6 +76,7 @@ const Navbutton = ({ history }) => {
         fontSize={{ base: 'md', xl: 'lg' }}
         colorScheme={user ? 'red' : 'blue'}
         onClick={handleClick}
+        isLoading={load}
       >
         {!user ? 'Login' : 'Logout'}
       </Button>

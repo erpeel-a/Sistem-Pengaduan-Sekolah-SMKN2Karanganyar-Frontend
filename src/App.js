@@ -1,6 +1,7 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import { Switch, Route } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
 import ScrollToTop from './utils/Scroll';
 import Fonts from './Fonts';
 
@@ -37,10 +38,10 @@ function App() {
       <Switch>
         <Route path="/" exact component={Homepage} />
         <Route path="/login" component={Login} />
-        <Route path="/buat" component={Create} />
-        <Route path="/pengaduan/:id/ubah" component={Edit} />
-        <Route path="/pengaduan/:id" component={Detail} />
-        <Route path="/pengaduan" component={Search} />
+        <PrivateRoute path="/buat" component={Create} />
+        <PrivateRoute path="/pengaduan/:id/ubah" component={Edit} />
+        <PrivateRoute path="/pengaduan/:id" component={Detail} />
+        <PrivateRoute path="/pengaduan" component={Search} />
       </Switch>
       <Footer />
     </ChakraProvider>
