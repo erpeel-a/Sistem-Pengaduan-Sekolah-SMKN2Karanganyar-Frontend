@@ -31,6 +31,7 @@ const Edit = ({ match, history }) => {
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
   const [load, setLoad] = useState(false);
+  const [valid, setValid] = useState(true);
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const Edit = ({ match, history }) => {
       label: 'Nomor Telepon',
       type: 'number',
       value: state?.no_telp,
+      inValid: !valid,
       change: e => setState({ ...state, no_telp: e.target.value }),
     },
     {
@@ -142,10 +144,21 @@ const Edit = ({ match, history }) => {
       .catch(error => {
         setLoad(false);
         console.log(error);
-        error?.response?.data?.data?.no_telp &&
+        const noTelpErr = error?.response?.data?.data?.no_telp;
+        const number = noTelpErr && noTelpErr[0].replace(/\D/g, '');
+        const title = 'Nomor telepon tidak valid!';
+        let description = '';
+        if (+number === 13) {
+          description = `Tidak boleh lebih dari ${number} karakter!`;
+        } else {
+          description = `Tidak boleh kurang dari ${number} karakter!`;
+        }
+        noTelpErr && setValid(false);
+        noTelpErr &&
           toast({
             position: 'top',
-            title: error.response.data.data.no_telp[0],
+            title,
+            description,
             status: 'error',
             duration: 4000,
             isClosable: true,
@@ -174,6 +187,7 @@ const Edit = ({ match, history }) => {
                 readOnly={input.readOnly}
                 value={input.value}
                 onChange={input.change}
+                isInvalid={input.inValid}
                 required
                 useLabel
               />

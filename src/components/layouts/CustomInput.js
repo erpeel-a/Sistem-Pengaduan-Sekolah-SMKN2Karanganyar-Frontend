@@ -9,6 +9,7 @@ const CustomInput = props => {
     value,
     readOnly,
     onChange,
+    isInvalid,
     useLabel,
     required,
     accept,
@@ -26,6 +27,7 @@ const CustomInput = props => {
         placeholder={label}
         value={value}
         onChange={onChange}
+        isInvalid={isInvalid}
         isReadOnly={readOnly}
         accept={accept}
       />
