@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -5,15 +6,17 @@ import PrivateRoute from './utils/PrivateRoute';
 import ScrollToTop from './utils/Scroll';
 import Fonts from './Fonts';
 
+import Loading from './components/layouts/Loading';
 import Navbar from './components/layouts/nav/Navbar';
-import Homepage from './containers/Homepage';
-import Login from './containers/Login';
-import Create from './components/complaints/Create';
-import Edit from './components/complaints/Edit';
-import Search from './components/complaints/Search';
-import Detail from './components/complaints/Detail';
-import NotFound from './components/NotFound';
 import Footer from './components/sections/Footer';
+
+const Homepage = lazy(() => import('./containers/Homepage'));
+const Login = lazy(() => import('./containers/Login'));
+const NotFound = lazy(() => import('./components/NotFound'));
+const Create = lazy(() => import('./components/complaints/Create'));
+const Edit = lazy(() => import('./components/complaints/Edit'));
+const Detail = lazy(() => import('./components/complaints/Detail'));
+const Search = lazy(() => import('./components/complaints/Search'));
 
 const breakpoints = createBreakpoints({
   sm: '320px',
@@ -36,16 +39,18 @@ function App() {
       <Fonts />
       <ScrollToTop />
       <Navbar />
-      <Switch>
-        <Route path="/" exact component={Homepage} />
-        <Route path="/login" component={Login} />
-        <Route path="/not-found" component={NotFound} />
-        <PrivateRoute path="/buat" component={Create} />
-        <PrivateRoute path="/pengaduan/:id/ubah" component={Edit} />
-        <PrivateRoute path="/pengaduan/:id" component={Detail} />
-        <PrivateRoute path="/pengaduan" component={Search} />
-        <Redirect to="not-found" />
-      </Switch>
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <Route path="/" exact component={Homepage} />
+          <Route path="/login" component={Login} />
+          <Route path="/not-found" component={NotFound} />
+          <PrivateRoute path="/buat" component={Create} />
+          <PrivateRoute path="/pengaduan/:id/ubah" component={Edit} />
+          <PrivateRoute path="/pengaduan/:id" component={Detail} />
+          <PrivateRoute path="/pengaduan" component={Search} />
+          <Redirect to="not-found" />
+        </Switch>
+      </Suspense>
       <Footer />
     </ChakraProvider>
   );
